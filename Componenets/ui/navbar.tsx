@@ -1,117 +1,100 @@
 "use client";
+import { useState } from "react";
 
-import * as React from "react";
+import Image from "next/image";
+import logo from "../../public/Component 1.svg";
+import { FaSearch } from "react-icons/fa";
 import Link from "next/link";
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu";
-
-const components: { title: string; href: string; description: string }[] = [
-  {
-    title: "Alert Dialog",
-    href: "/docs/primitives/alert-dialog",
-    description:
-      "A modal dialog that interrupts the user with important content and expects a response.",
-  },
-  {
-    title: "Hover Card",
-    href: "/docs/primitives/hover-card",
-    description:
-      "For sighted users to preview content available behind a link.",
-  },
-  {
-    title: "Progress",
-    href: "/docs/primitives/progress",
-    description:
-      "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
-  },
-  {
-    title: "Scroll-area",
-    href: "/docs/primitives/scroll-area",
-    description: "Visually or semantically separates content.",
-  },
-  {
-    title: "Tabs",
-    href: "/docs/primitives/tabs",
-    description:
-      "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
-  },
-  {
-    title: "Tooltip",
-    href: "/docs/primitives/tooltip",
-    description:
-      "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
-  },
-];
 
 export function NavigationMenuDemo() {
-  return (
-    <NavigationMenu>
-      <NavigationMenuList>
-        <NavigationMenuItem>
-          <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <ul className="w-96">
-              <ListItem href="/docs" title="Introduction">
-                Re-usable components built with Tailwind CSS.
-              </ListItem>
-              <ListItem href="/docs/installation" title="Installation">
-                How to install dependencies and structure your app.
-              </ListItem>
-              <ListItem href="/docs/primitives/typography" title="Typography">
-                Styles for headings, paragraphs, lists...etc
-              </ListItem>
-            </ul>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-        <NavigationMenuItem className="hidden md:flex">
-          <NavigationMenuTrigger>Components</NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <ul className="grid w-[400px] gap-2 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-              {components.map((component) => (
-                <ListItem
-                  key={component.title}
-                  title={component.title}
-                  href={component.href}
-                >
-                  {component.description}
-                </ListItem>
-              ))}
-            </ul>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-            <Link href="/docs">Docs</Link>
-          </NavigationMenuLink>
-        </NavigationMenuItem>
-      </NavigationMenuList>
-    </NavigationMenu>
-  );
-}
+  const [open, setOpen] = useState(false);
 
-function ListItem({
-  title,
-  children,
-  href,
-  ...props
-}: React.ComponentPropsWithoutRef<"li"> & { href: string }) {
   return (
-    <li {...props}>
-      <NavigationMenuLink asChild>
-        <Link href={href}>
-          <div className="flex flex-col gap-1 text-sm">
-            <div className="leading-none font-medium">{title}</div>
-            <div className="line-clamp-2 text-muted-foreground">{children}</div>
+    <>
+      <nav className="bg-[#ffff] h-18 px-52 py-5 flex justify-between items-center ">
+        <div className="logo  ">
+          <Image
+            src={logo}
+            alt="logo image "
+            width={500}
+            height={500}
+            className="w-full "
+          />
+        </div>
+        <div className="search hidden md:flex pt-4 pb-3.25 flex justify-between items-center w-[672px] pr-12 pl-5 border-border border rounded-4xl ">
+          <input
+            type="text"
+            placeholder="Search for products, brands and more..."
+            className=" outline-0"
+          />
+          <div className="bg-sprinGreen size-9 p-2 rounded-full">
+            <FaSearch className="text-white " />
           </div>
-        </Link>
-      </NavigationMenuLink>
-    </li>
+        </div>
+        <ul className="hidden md:flex justify-center items-center py-4 gap-6 ">
+          <li>
+            <Link href={"/"}>Home</Link>
+          </li>
+          <li>
+            <Link href={"/shop"}>Shop</Link>
+          </li>
+          <li>
+            {" "}
+            {/* <NavigationMenuItem className=" md:flex">
+              <NavigationMenuTrigger>Components</NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <ul className="grid w-[400px] gap-2 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                  {components.map((component) => (
+                    <li>
+                      <Link
+                        key={component.title}
+                        title={component.title}
+                        href={component.href}
+                      >
+                        {component.description}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </NavigationMenuContent>
+            </NavigationMenuItem> */}
+            Component
+          </li>
+
+          <li>
+            <Link href={"/brands"}>Brands</Link>
+          </li>
+        </ul>
+        {/* زرار المينيو يظهر في الموبايل فقط */}
+        <button className="md:hidden " onClick={() => setOpen(true)}>
+          ☰
+        </button>
+
+        {/* الخلفية */}
+        {open && (
+          <div
+            className="fixed inset-0 bg-black/40"
+            onClick={() => setOpen(false)}
+          ></div>
+        )}
+
+        {/* Sidebar */}
+        <div
+          className={`fixed top-0 left-0 h-full w-64 bg-white shadow-lg transform transition-transform duration-300 md:hidden ${
+            open ? "translate-x-0" : "  -translate-x-full"
+          }`}
+        >
+          <button className="p-4" onClick={() => setOpen(false)}>
+            ✕
+          </button>
+
+          <ul className="p-4 space-y-4">
+            <li>Home</li>
+            <li>Products</li>
+            <li>Profile</li>
+          </ul>
+        </div>
+      </nav>
+    </>
   );
 }
