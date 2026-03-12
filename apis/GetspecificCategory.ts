@@ -1,9 +1,11 @@
 import { CategoryInterface } from "@/interfaces/CategoryInterface";
 
-export default async function Getallproduct(): Promise<CategoryInterface[]> {
+export default async function GetspecificCatygory(
+  id: string,
+): Promise<CategoryInterface[]> {
   try {
     const data = await fetch(
-      `https://ecommerce.routemisr.com/api/v1/categories`,
+      `https://ecommerce.routemisr.com/api/v1/categories/${id}`,
       {
         cache: "force-cache",
         next: {
