@@ -1,17 +1,11 @@
-import { CategoryInterface } from "@/interfaces/CategoryInterface";
+import { SpecificCategoryInterface } from "@/interfaces/SpecificCategoryInterface";
 
 export default async function GetspecificCatygory(
   id: string,
-): Promise<CategoryInterface[]> {
+): Promise<SpecificCategoryInterface> {
   try {
     const data = await fetch(
       `https://ecommerce.routemisr.com/api/v1/categories/${id}`,
-      {
-        cache: "force-cache",
-        next: {
-          revalidate: 60 * 100,
-        },
-      },
     );
     if (!data.ok) {
       throw new Error(`something went wrong`);
@@ -19,7 +13,7 @@ export default async function GetspecificCatygory(
     const category = await data?.json();
 
     return category?.data;
-  } catch (error) {
-    throw new Error("sever not found");
+  } catch {
+    throw new Error("server error");
   }
 }

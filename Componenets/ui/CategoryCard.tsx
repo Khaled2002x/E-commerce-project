@@ -8,7 +8,7 @@ export default function CategoryCard({
 }) {
   return (
     <>
-      <div className=" ">
+      <div className=" hover:scale-[1.01]  duration-100 transition-all">
         <Link
           href={`categoryDetails/${categoryData._id}`}
           className="rounded-[8px] p-4  flex justify-center items-center flex-col gap-3  shadow-accent text-[12px] shadow"
@@ -20,7 +20,7 @@ export default function CategoryCard({
             className=" size-20 object-cover rounded-full"
             alt={categoryData.name}
           />
-          <p className="text-center">{categoryData.name}</p>
+          <p className="text-center ">{categoryData.name}</p>
         </Link>
       </div>
     </>

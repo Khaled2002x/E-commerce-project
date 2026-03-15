@@ -3,12 +3,7 @@ import { useState } from "react";
 
 import Image from "next/image";
 import logo from "../../public/Component 1.svg";
-import {
-  FaArrowCircleDown,
-  FaArrowDown,
-  FaSearch,
-  FaUser,
-} from "react-icons/fa";
+import { FaUser } from "react-icons/fa";
 import Link from "next/link";
 
 export function NavigationMenuDemo() {
@@ -17,9 +12,9 @@ export function NavigationMenuDemo() {
 
   return (
     <>
-      <nav className="bg-[#ffff] h-18 px-6 md-px-20 lg:px-52 py-5 flex justify-between items-center ">
+      <nav className="bg-white h-16 px-3 md:px-10 lg:px-20 py-4 flex justify-between w-full m-auto items-center">
+        {" "}
         <Image src={logo} alt="logo image " width={200} height={100} />
-
         <ul className="hidden md:flex justify-center items-center py-4 gap-6 ">
           <li>
             <Link
@@ -44,7 +39,7 @@ export function NavigationMenuDemo() {
             Components ^
             {/* <FaArrowDown className="size-6 rounded-full hover:text-sprinGreen " /> */}
             {openDropdown && (
-              <ul className="absolute top-full left-0 mt-2 w-40 bg-white shadow-md rounded-md py-2">
+              <ul className="absolute top-0 bottom-0 z-50 left-0 mt-2 w-40 bg-white shadow-md rounded-md py-2">
                 <li>
                   <Link
                     href="/categories"
@@ -84,21 +79,19 @@ export function NavigationMenuDemo() {
           </li>
         </ul>
         {/* زرار المينيو يظهر في الموبايل فقط */}
-        <button className="md:hidden " onClick={() => setOpen(true)}>
+        <button className="md:hidden  ms-auto" onClick={() => setOpen(true)}>
           ☰
         </button>
-
         {/* الخلفية */}
         {open && (
           <div
-            className="fixed inset-0  bg-black/40"
+            className="fixed   bg-black/40"
             onClick={() => setOpen(false)}
           ></div>
         )}
-
         {/* Sidebar */}
         <div
-          className={`fixed top-0 right-0 p-2 h-full w-64 bg-white shadow-lg transform transition-transform duration-300 md:hidden ${
+          className={`fixed top-0  z-100 right-0 p-2 h-full w-64 bg-white shadow-lg transform transition-transform duration-300 md:hidden ${
             open ? "translate-x-0" : "  translate-x-full"
           }`}
         >
@@ -155,13 +148,29 @@ export function NavigationMenuDemo() {
               <Link href={"/brands"}>Brands</Link>
             </li>
           </ul>
-          <button className="text-white w-full  hover:scale-[1.02] duration-75 flex justify-center items-center gap-1 bg-sprinGreen rounded-3xl p-3  cursor-pointer">
-            <FaUser /> Sign in
-          </button>
+          <div className=" flex flex-col gap-2">
+            <button className="text-white w-full  hover:scale-[1.02] duration-75 flex justify-center items-center gap-1 bg-sprinGreen rounded-3xl p-3  cursor-pointer">
+              <FaUser /> Sign in
+            </button>
+            <button className="text-white w-full    hover:scale-[1.02] duration-75 flex justify-center items-center gap-1 bg-sprinGreen rounded-3xl p-3  cursor-pointer">
+              <FaUser /> Register
+            </button>
+          </div>
         </div>
-        <button className="text-white  hidden  hover:scale-[1.02] duration-75 md:flex justify-center items-center gap-1 bg-sprinGreen rounded-3xl p-3  cursor-pointer">
-          <FaUser /> Sign in
-        </button>
+        <div className=" flex justify-center items-center gap-3">
+          <Link
+            href={"/auth/login"}
+            className="text-white  hidden  hover:scale-[1.02] duration-75 md:flex justify-center items-center gap-1 bg-sprinGreen rounded-3xl p-3  cursor-pointer"
+          >
+            <FaUser /> Sign in
+          </Link>
+          <Link
+            href={"/auth/register"}
+            className="text-white  hidden  hover:scale-[1.02] duration-75 md:flex justify-center items-center gap-1 bg-sprinGreen rounded-3xl p-3  cursor-pointer"
+          >
+            <FaUser /> Register
+          </Link>
+        </div>
       </nav>
     </>
   );
