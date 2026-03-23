@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { NavigationMenuDemo } from "@/Componenets/ui/navbar";
 import { Exo } from "next/font/google";
+import ToastProvider from "@/Componenets/ui/Toastify";
 const exoSans = Exo({
   subsets: ["latin"],
   variable: "--font-exo-sans",
@@ -27,6 +28,7 @@ export default function RootLayout({
       <body className={`${exoSans.variable} ${exoMono.variable} antialiased`}>
         <NavigationMenuDemo />
         {children}
+        <ToastProvider />
       </body>
     </html>
   );

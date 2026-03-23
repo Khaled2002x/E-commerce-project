@@ -15,7 +15,7 @@ export function NavigationMenuDemo() {
       <nav className="bg-white h-16 px-3 md:px-10 lg:px-20 py-4 flex justify-between w-full m-auto items-center">
         {" "}
         <Image src={logo} alt="logo image " width={200} height={100} />
-        <ul className="hidden md:flex justify-center items-center py-4 gap-6 ">
+        <ul className="hidden lg:flex justify-center items-center py-4 gap-6 ">
           <li>
             <Link
               className="hover:text-sprinGreen duration-75 rounded-xl p-3"
@@ -79,7 +79,7 @@ export function NavigationMenuDemo() {
           </li>
         </ul>
         {/* زرار المينيو يظهر في الموبايل فقط */}
-        <button className="md:hidden  ms-auto" onClick={() => setOpen(true)}>
+        <button className="lg:hidden  ms-auto" onClick={() => setOpen(!open)}>
           ☰
         </button>
         {/* الخلفية */}
@@ -160,13 +160,13 @@ export function NavigationMenuDemo() {
         <div className=" flex justify-center items-center gap-3">
           <Link
             href={"/auth/login"}
-            className="text-white  hidden  hover:scale-[1.02] duration-75 md:flex justify-center items-center gap-1 bg-sprinGreen rounded-3xl p-3  cursor-pointer"
+            className="text-white  hidden  hover:scale-[1.02] duration-75 lg:flex justify-center items-center gap-1 bg-sprinGreen rounded-3xl p-3  cursor-pointer"
           >
             <FaUser /> Sign in
           </Link>
           <Link
             href={"/auth/register"}
-            className="text-white  hidden  hover:scale-[1.02] duration-75 md:flex justify-center items-center gap-1 bg-sprinGreen rounded-3xl p-3  cursor-pointer"
+            className="text-white  hidden  hover:scale-[1.02] duration-75 lg:flex justify-center items-center gap-1 bg-sprinGreen rounded-3xl p-3  cursor-pointer"
           >
             <FaUser /> Register
           </Link>
