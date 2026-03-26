@@ -3,6 +3,8 @@ import "./globals.css";
 import { NavigationMenuDemo } from "@/Componenets/ui/navbar";
 import { Exo } from "next/font/google";
 import ToastProvider from "@/Componenets/ui/Toastify";
+import Providers from "./auth/Providers";
+import Header from "@/Componenets/ui/Header";
 const exoSans = Exo({
   subsets: ["latin"],
   variable: "--font-exo-sans",
@@ -26,9 +28,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${exoSans.variable} ${exoMono.variable} antialiased`}>
-        <NavigationMenuDemo />
-        {children}
-        <ToastProvider />
+        <Providers>
+          <Header />
+          <NavigationMenuDemo />
+          {children}
+          <ToastProvider />
+        </Providers>
       </body>
     </html>
   );

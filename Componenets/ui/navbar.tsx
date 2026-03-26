@@ -5,11 +5,13 @@ import Image from "next/image";
 import logo from "../../public/Component 1.svg";
 import { FaUser } from "react-icons/fa";
 import Link from "next/link";
-
+import { useSession } from "next-auth/react";
 export function NavigationMenuDemo() {
   const [open, setOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(false);
-
+  const { data, status } = useSession();
+  const Name = data?.user?.name;
+  const isLogin = status === "authenticated";
   return (
     <>
       <nav className="bg-white h-16 px-3 md:px-10 lg:px-20 py-4 flex justify-between w-full m-auto items-center">
@@ -149,27 +151,52 @@ export function NavigationMenuDemo() {
             </li>
           </ul>
           <div className=" flex flex-col gap-2">
-            <button className="text-white w-full  hover:scale-[1.02] duration-75 flex justify-center items-center gap-1 bg-sprinGreen rounded-3xl p-3  cursor-pointer">
-              <FaUser /> Sign in
-            </button>
-            <button className="text-white w-full    hover:scale-[1.02] duration-75 flex justify-center items-center gap-1 bg-sprinGreen rounded-3xl p-3  cursor-pointer">
-              <FaUser /> Register
-            </button>
+            {isLogin ? (
+              <p> hi {Name?.split(" ")[0]}</p>
+            ) : (
+              <Link
+                href={"/auth/login"}
+                className="text-white w-full  hover:scale-[1.02] duration-75 flex justify-center items-center gap-1 bg-sprinGreen rounded-3xl p-3  cursor-pointer"
+              >
+                <FaUser /> Sign in
+              </Link>
+            )}
+            {isLogin ? (
+              ""
+            ) : (
+              <Link
+                href={"/auth/register"}
+                className="text-white w-full    hover:scale-[1.02] duration-75 flex justify-center items-center gap-1 bg-sprinGreen rounded-3xl p-3  cursor-pointer"
+              >
+                <FaUser /> Register
+              </Link>
+            )}
           </div>
         </div>
         <div className=" flex justify-center items-center gap-3">
-          <Link
-            href={"/auth/login"}
-            className="text-white  hidden  hover:scale-[1.02] duration-75 lg:flex justify-center items-center gap-1 bg-sprinGreen rounded-3xl p-3  cursor-pointer"
-          >
-            <FaUser /> Sign in
-          </Link>
-          <Link
-            href={"/auth/register"}
-            className="text-white  hidden  hover:scale-[1.02] duration-75 lg:flex justify-center items-center gap-1 bg-sprinGreen rounded-3xl p-3  cursor-pointer"
-          >
-            <FaUser /> Register
-          </Link>
+          {isLogin ? (
+            <p className="bg-sprinGreen hidden lg:block p-2 text-white rounded-2xl">
+              hi {Name?.split(" ")[0]}
+            </p>
+          ) : (
+            <Link
+              href={"/auth/login"}
+              className="text-white w-full  hidden   hover:scale-[1.02] duration-75 lg:flex justify-center items-center gap-1 bg-sprinGreen rounded-3xl p-3  cursor-pointer"
+            >
+              <FaUser />
+              sign In
+            </Link>
+          )}
+          {isLogin ? (
+            ""
+          ) : (
+            <Link
+              href={"/auth/register"}
+              className="text-white  hidden  hover:scale-[1.02] duration-75 lg:flex justify-center items-center gap-1 bg-sprinGreen rounded-3xl p-3  cursor-pointer"
+            >
+              <FaUser /> Register
+            </Link>
+          )}
         </div>
       </nav>
     </>

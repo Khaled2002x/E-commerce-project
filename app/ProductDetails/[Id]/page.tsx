@@ -3,7 +3,6 @@ import ProductDetailsImages from "@/Componenets/ui/ProductDetailsImages";
 import QuantityInProductDetails from "@/Componenets/ui/QuantityInProductDetails";
 import { Button } from "@/components/ui/button";
 import { ProductDetailsInterFace } from "@/interfaces/ProductDetailsInterface";
-import { FaCaretRight } from "react-icons/fa";
 import { FaCarTunnel } from "react-icons/fa6";
 export default async function page({
   params,

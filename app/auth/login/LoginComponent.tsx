@@ -33,9 +33,7 @@ export default function LoginComponenet() {
       Setloading(false);
       reset();
 
-      setTimeout(() => {
-        router.push("/");
-      }, 1000);
+      router.push("/");
     } else {
       toast.error("user or password is not correct");
       Setloading(false);

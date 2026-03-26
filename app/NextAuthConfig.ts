@@ -1,6 +1,6 @@
 import { NextAuthOptions } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-
+import { jwtDecode } from "jwt-decode";
 export const NextAuthConfig: NextAuthOptions = {
   providers: [
     Credentials({
@@ -22,10 +22,10 @@ export const NextAuthConfig: NextAuthOptions = {
             },
           );
           const res = await data.json();
-          console.log(res);
           if (data.ok) {
+            const { id }: { id: string } = jwtDecode(res.token);
             const { name, email } = res?.user;
-            return { name, email, id: "" };
+            return { name, email, id: id, responseToken: res.token };
           } else {
             return null;
           }
@@ -37,8 +37,19 @@ export const NextAuthConfig: NextAuthOptions = {
       },
     }),
   ],
-  jwt: {
-    maxAge: 60 * 60 * 24,
+  callbacks: {
+    jwt: ({ token, user }) => {
+      if (user) {
+        token.token = user.responseToken;
+        token.id = user.id;
+      }
+      return token;
+    },
+    session({ session, token }) {
+      session.user.id = token.id as string;
+      session.user.name = token.name!;
+      return session;
+    },
   },
   pages: {
     signIn: "/auth/login",
