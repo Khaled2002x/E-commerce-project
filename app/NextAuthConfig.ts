@@ -1,6 +1,7 @@
 import { NextAuthOptions } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { jwtDecode } from "jwt-decode";
+import { use } from "react";
 export const NextAuthConfig: NextAuthOptions = {
   providers: [
     Credentials({
@@ -37,14 +38,19 @@ export const NextAuthConfig: NextAuthOptions = {
       },
     }),
   ],
+  session: {
+    strategy: "jwt",
+  },
   callbacks: {
     jwt: ({ token, user }) => {
       if (user) {
         token.token = user.responseToken;
         token.id = user.id;
+        token.name = user.name;
       }
       return token;
     },
+
     session({ session, token }) {
       session.user.id = token.id as string;
       session.user.name = token.name!;

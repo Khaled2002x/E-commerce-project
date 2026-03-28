@@ -1,9 +1,8 @@
 "use client";
 import { useState } from "react";
-
 import Image from "next/image";
 import logo from "../../public/Component 1.svg";
-import { FaUser } from "react-icons/fa";
+import { FaHeadphones, FaShoppingCart, FaUser } from "react-icons/fa";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 export function NavigationMenuDemo() {
@@ -114,7 +113,7 @@ export function NavigationMenuDemo() {
               className=" relative"
               onClick={() => setOpenDropdown(!openDropdown)}
             >
-              Component ^
+              Component
               {openDropdown && (
                 <ul className="absolute top-full left-0 mt-2 w-40 bg-white shadow-md rounded-md py-2">
                   <li>
@@ -172,31 +171,40 @@ export function NavigationMenuDemo() {
               </Link>
             )}
           </div>
+          <div className="  justify-center  flex items-center gap-3">
+            <div className=" flex justify-center items-center gap-3 pr-3 border-r border-[#E5E7EB]">
+              <div className="rounded-full size-10 bg-green-100 flex justify-center items-center">
+                <FaHeadphones className="text-sprinGreen  " />
+              </div>
+              <div className=" flex flex-col gap-1.5">
+                <p className=" text-gray-600">Support</p>
+                <p className=" font-semibold">24/7 Help</p>
+              </div>
+            </div>
+            <Link href={"/Cart"} className=" relative">
+              <FaShoppingCart className="text-azure  text-2xl " />
+              <span className=" absolute -top-3.5 -right-2.5 font-bold   rounded-full text-white flex justify-center items-center  bg-sprinGreen size-5">
+                1
+              </span>
+            </Link>
+          </div>
         </div>
-        <div className=" flex justify-center items-center gap-3">
-          {isLogin ? (
-            <p className="bg-sprinGreen hidden lg:block p-2 text-white rounded-2xl">
-              hi {Name?.split(" ")[0]}
-            </p>
-          ) : (
-            <Link
-              href={"/auth/login"}
-              className="text-white w-full  hidden   hover:scale-[1.02] duration-75 lg:flex justify-center items-center gap-1 bg-sprinGreen rounded-3xl p-3  cursor-pointer"
-            >
-              <FaUser />
-              sign In
-            </Link>
-          )}
-          {isLogin ? (
-            ""
-          ) : (
-            <Link
-              href={"/auth/register"}
-              className="text-white  hidden  hover:scale-[1.02] duration-75 lg:flex justify-center items-center gap-1 bg-sprinGreen rounded-3xl p-3  cursor-pointer"
-            >
-              <FaUser /> Register
-            </Link>
-          )}
+        <div className="  justify-center hidden md:flex items-center gap-3">
+          <div className=" flex justify-center items-center gap-3 pr-3 border-r border-[#E5E7EB]">
+            <div className="rounded-full size-10 bg-green-100 flex justify-center items-center">
+              <FaHeadphones className="text-sprinGreen  " />
+            </div>
+            <div className=" flex flex-col gap-1.5">
+              <p className=" text-gray-600">Support</p>
+              <p className=" font-semibold">24/7 Help</p>
+            </div>
+          </div>
+          <Link href={"/Cart"} className=" group relative">
+            <FaShoppingCart className="text-azure group-hover:text-sprinGreen  text-2xl " />
+            <span className=" absolute -top-3.5 -right-2.5 font-bold   rounded-full text-white flex justify-center items-center  bg-sprinGreen size-5">
+              1
+            </span>
+          </Link>
         </div>
       </nav>
     </>

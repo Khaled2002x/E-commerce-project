@@ -9,7 +9,6 @@ export default function Header() {
   const session = useSession();
 
   const UserName = session?.data?.user?.name;
-  console.log(UserName);
 
   const isLogin = session.status === "authenticated";
   return (

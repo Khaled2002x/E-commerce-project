@@ -1,4 +1,5 @@
 import GetProductDetails from "@/apis/GetProductDetails";
+import AddtoCartButton from "@/Componenets/ui/AddtoCartButton";
 import ProductDetailsImages from "@/Componenets/ui/ProductDetailsImages";
 import QuantityInProductDetails from "@/Componenets/ui/QuantityInProductDetails";
 import { Button } from "@/components/ui/button";
@@ -40,11 +41,14 @@ export default async function page({
               {ProductDetails.description}
             </p>
             <QuantityInProductDetails productDetails={ProductDetails} />
-            <div className=" grid grid-cols-2 w-full gap-3">
-              <Button className="bg-sprinGreen py-6 rounded-[12px]  cursor-pointer">
+            <div className=" grid grid-cols-2  w-full gap-3">
+              <AddtoCartButton
+                id={ProductDetails._id}
+                className="bg-sprinGreen  text-white flex justify-center items-center gap-2 rounded-[12px]  cursor-pointer"
+              >
                 <FaCarTunnel />
                 Add to cart{" "}
-              </Button>
+              </AddtoCartButton>
               <Button className="bg-[#101828] rounded-[12px] py-6 cursor-pointer">
                 Buy Now{" "}
               </Button>

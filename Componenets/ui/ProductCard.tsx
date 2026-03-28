@@ -2,6 +2,7 @@ import { ProductInterface } from "@/interfaces/ProductInterface";
 import Image from "next/image";
 import { FaEye, FaHeart } from "react-icons/fa";
 import Link from "next/link";
+import AddtoCartButton from "./AddtoCartButton";
 export default function ProductCard({
   product,
 }: {
@@ -37,9 +38,12 @@ export default function ProductCard({
         </p>
         <div className="price flex justify-between items-center">
           <h2 className=" font-bold text-[18px] ">{product.price} EGP</h2>
-          <button className="bg-sprinGreen size-10 text-2xl rounded-full text-white cursor-pointer">
+          <AddtoCartButton
+            id={product._id}
+            className="bg-sprinGreen size-10 text-2xl rounded-full text-white cursor-pointer"
+          >
             +
-          </button>
+          </AddtoCartButton>
         </div>
       </div>
     </div>

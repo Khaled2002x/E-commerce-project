@@ -1,7 +1,7 @@
 "use client";
 import { ProductDetailsInterFace } from "@/interfaces/ProductDetailsInterface";
 import Image from "next/image";
-import React, { useState } from "react";
+import { useState } from "react";
 import Carousil from "./Swipper";
 
 export default function ProductDetailsImages({
