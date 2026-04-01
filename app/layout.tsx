@@ -4,7 +4,7 @@ import { NavigationMenuDemo } from "@/Componenets/ui/navbar";
 import { Exo } from "next/font/google";
 import ToastProvider from "@/Componenets/ui/Toastify";
 import Providers from "./auth/Providers";
-import Header from "@/Componenets/ui/Header";
+import ProvidersReactQuery from "./ReactQuerieProvider/provider";
 const exoSans = Exo({
   subsets: ["latin"],
   variable: "--font-exo-sans",
@@ -29,10 +29,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${exoSans.variable} ${exoMono.variable} antialiased`}>
         <Providers>
-          <Header />
-          <NavigationMenuDemo />
-          {children}
-          <ToastProvider />
+          <ProvidersReactQuery>
+            <NavigationMenuDemo />
+            {children}
+            <ToastProvider />
+          </ProvidersReactQuery>
         </Providers>
       </body>
     </html>

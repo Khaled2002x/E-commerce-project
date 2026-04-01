@@ -12,17 +12,17 @@ export default function Header() {
 
   const isLogin = session.status === "authenticated";
   return (
-    <div className="px-1   hidden md:flex md:px-4 lg:px-20 py-4 border-b border-[#F3F4F6] w-full m-auto lg:justify-between gap-2  items-center">
+    <div className="px-1   hidden md:flex md:px-4  xl:px-20 py-2 border-b border-[#F3F4F6] w-full m-auto justify-between gap-2  items-center">
       <div className="left flex items-center gap-4">
         <div className=" flex items-center gap-2 justify-center">
           <FaTruck className="text-sprinGreen text[14px]" />
-          <p className=" font-medium text-azure m-0  text[14px]">
+          <p className="text-[14px] font-medium text-azure m-0  text[14px]">
             Free Shipping on Orders 500 EGP
           </p>
         </div>
         <div className=" flex items-center justify-center gap-2">
           <FaGift className="text-sprinGreen text[14px]" />
-          <p className=" font-medium text-azure m-0 text[14px]">
+          <p className="text-[14px] font-medium text-azure m-0 text[14px]">
             New Arrivals Daily
           </p>
         </div>

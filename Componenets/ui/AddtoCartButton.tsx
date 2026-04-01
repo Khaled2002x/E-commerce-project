@@ -1,7 +1,8 @@
 "use client";
 import AddToCart from "@/apis/AddToCart";
 import { Spinner } from "@/components/ui/spinner";
-import { ReactNode, useState } from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { ReactNode } from "react";
 import { toast } from "react-toastify";
 
 export default function AddtoCartButton({
@@ -13,25 +14,27 @@ export default function AddtoCartButton({
   className: string;
   id: string;
 }) {
-  const [loading, setLoading] = useState(false);
+  const Invalidatequery = useQueryClient();
 
-  const HandelAddtoCart = async () => {
-    setLoading(true);
-    try {
-      const data = await AddToCart({ id });
-      if (data) toast.success("Item added to cart sucsssesfully");
-    } catch (error) {
+  const { mutate, isPending } = useMutation({
+    mutationKey: ["AddtToCart", id],
+    mutationFn: AddToCart,
+    onSuccess: (data) => {
+      toast.success(data.message);
+      Invalidatequery.invalidateQueries({
+        queryKey: ["Cart"],
+      });
+    },
+    onError: (error) => {
       toast.error(error.message);
-    }
-    setLoading(false);
-  };
-
+    },
+  });
   return (
     <>
-      {loading ? (
+      {isPending ? (
         <Spinner />
       ) : (
-        <button onClick={HandelAddtoCart} className={className}>
+        <button onClick={() => mutate({ id })} className={className}>
           {children}
         </button>
       )}

@@ -5,7 +5,7 @@ export default async function GetAllSubCategoriesOnCategory(
 ): Promise<supcategoryBasedonCategoryInterface[]> {
   try {
     const data = await fetch(
-      `https://ecommerce.routemisr.com/api/v1/categories/${id}/subcategories`,
+      `${process.env.Apiroute_v1}/categories/${id}/subcategories`,
     );
     if (!data.ok) {
       throw new Error(`something went wrong`);

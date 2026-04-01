@@ -3,9 +3,7 @@ export default async function GetProductDetails(
   id: string,
 ): Promise<ProductDetailsInterFace> {
   try {
-    const data = await fetch(
-      `https://ecommerce.routemisr.com/api/v1/products/${id}`,
-    );
+    const data = await fetch(`${process.env.Apiroute_v1}/products/${id}`);
     if (!data.ok) {
       throw new Error(`something went wrong`);
     }

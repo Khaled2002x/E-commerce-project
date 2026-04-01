@@ -142,6 +142,9 @@
     font-family: var(--font-exo-mono);
   }
 }
+.left {
+  border-radius: 16px;
+}
 .spring {
   background: linear-gradient(to top, #00bc7d 100%, #007a55);
 }

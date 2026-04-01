@@ -5,15 +5,33 @@ import logo from "../../public/Component 1.svg";
 import { FaHeadphones, FaShoppingCart, FaUser } from "react-icons/fa";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
+import { useQuery } from "@tanstack/react-query";
+import { CartData } from "@/interfaces/CartData";
+import Header from "./Header";
 export function NavigationMenuDemo() {
   const [open, setOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(false);
   const { data, status } = useSession();
   const Name = data?.user?.name;
   const isLogin = status === "authenticated";
+  const { data: Cartdata } = useQuery({
+    queryKey: ["Cart"],
+    queryFn: async () => {
+      return fetch(`api/Cart`).then((payload) => payload.json());
+    },
+    staleTime: 1000 * 60 * 60 * 24,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    retry: false,
+  });
+  const Products: CartData = Cartdata?.data;
+  const NumberofCartItem = Products?.products?.length;
+
   return (
-    <>
-      <nav className="bg-white h-16 px-3 md:px-10 lg:px-20 py-4 flex justify-between w-full m-auto items-center">
+    <div className="">
+      <Header />
+      <nav className="bg-white h-16 px-3 md:px-10 lg:px-20 py-4 flex   justify-between w-full m-auto items-center">
         {" "}
         <Image src={logo} alt="logo image " width={200} height={100} />
         <ul className="hidden lg:flex justify-center items-center py-4 gap-6 ">
@@ -183,8 +201,8 @@ export function NavigationMenuDemo() {
             </div>
             <Link href={"/Cart"} className=" relative">
               <FaShoppingCart className="text-azure  text-2xl " />
-              <span className=" absolute -top-3.5 -right-2.5 font-bold   rounded-full text-white flex justify-center items-center  bg-sprinGreen size-5">
-                1
+              <span className=" absolute -top-3.5 -right-2.5 font-bold text-[10px]   rounded-full text-white flex justify-center items-center  bg-sprinGreen size-5">
+                {NumberofCartItem}
               </span>
             </Link>
           </div>
@@ -201,12 +219,14 @@ export function NavigationMenuDemo() {
           </div>
           <Link href={"/Cart"} className=" group relative">
             <FaShoppingCart className="text-azure group-hover:text-sprinGreen  text-2xl " />
-            <span className=" absolute -top-3.5 -right-2.5 font-bold   rounded-full text-white flex justify-center items-center  bg-sprinGreen size-5">
-              1
-            </span>
+            {isLogin && NumberofCartItem > 0 && (
+              <span className=" absolute -top-3.5 -right-2.5 font-bold text-[10px]   rounded-full text-white flex justify-center items-center  bg-sprinGreen size-5">
+                {NumberofCartItem}
+              </span>
+            )}
           </Link>
         </div>
       </nav>
-    </>
+    </div>
   );
 }

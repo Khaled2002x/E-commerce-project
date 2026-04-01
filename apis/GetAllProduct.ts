@@ -2,15 +2,9 @@ import { ProductInterface } from "@/interfaces/ProductInterface";
 
 export default async function GetAllProduct(): Promise<ProductInterface[]> {
   try {
-    const data = await fetch(
-      `https://ecommerce.routemisr.com/api/v1/products`,
-      {
-        cache: "force-cache",
-        next: {
-          revalidate: 60 * 60,
-        },
-      },
-    );
+    const data = await fetch(`${process.env.Apiroute_v1}/products`, {
+      cache: "force-cache",
+    });
     if (!data.ok) {
       throw new Error(`something went wrong`);
     }

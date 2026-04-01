@@ -3,10 +3,10 @@ export interface Root {
   message: string;
   numOfCartItems: number;
   cartId: string;
-  data: AddToCartIbterface;
+  data: CartData;
 }
 
-export interface AddToCartIbterface {
+export interface CartData {
   _id: string;
   message: string;
   cartOwner: string;

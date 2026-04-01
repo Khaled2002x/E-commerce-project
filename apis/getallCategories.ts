@@ -2,15 +2,9 @@ import { CategoryInterface } from "@/interfaces/CategoryInterface";
 
 export default async function Getallcategories(): Promise<CategoryInterface[]> {
   try {
-    const data = await fetch(
-      `https://ecommerce.routemisr.com/api/v1/categories`,
-      {
-        cache: "force-cache",
-        next: {
-          revalidate: 60 * 100,
-        },
-      },
-    );
+    const data = await fetch(`${process.env.Apiroute_v1}/categories`, {
+      cache: "force-cache",
+    });
     if (!data.ok) {
       throw new Error(`something went wrong`);
     }
@@ -18,6 +12,8 @@ export default async function Getallcategories(): Promise<CategoryInterface[]> {
 
     return category?.data;
   } catch (error) {
+    console.log(process.env.Apiroute_v1);
+
     throw new Error("sever not found");
   }
 }

@@ -32,7 +32,6 @@ export default function LoginComponenet() {
       toast.success("loogged in sucsessfuly");
       Setloading(false);
       reset();
-
       router.push("/");
     } else {
       toast.error("user or password is not correct");
