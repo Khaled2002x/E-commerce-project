@@ -31,7 +31,7 @@ export default function RootLayout({
         <Providers>
           <ProvidersReactQuery>
             <NavigationMenuDemo />
-            {children}
+            <div className="pt-17">{children}</div>
             <ToastProvider />
           </ProvidersReactQuery>
         </Providers>
