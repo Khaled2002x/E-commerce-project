@@ -1,12 +1,14 @@
-import { getServerSession } from "next-auth";
+import GetAllBrands from "@/apis/Brands/GetAllBrands";
+import BrandsComponent from "./BrandsComponent";
+import { BrandsInterface } from "@/interfaces/GetAllBrandsInterface";
 
 export default async function Brands() {
-  // const data = await getServerSession({ secret: process.env.NEXTAUTH_SECRET });
-  // console.log(data);
-
+  const data: BrandsInterface[] = await GetAllBrands();
   return (
     <>
-      <div className="pt-10 text-center">Brands</div>
+      <div>
+        <BrandsComponent data={data} />
+      </div>
     </>
   );
 }

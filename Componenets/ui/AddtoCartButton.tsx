@@ -31,13 +31,13 @@ export default function AddtoCartButton({
   });
   return (
     <>
-      {isPending ? (
-        <Spinner />
-      ) : (
-        <button onClick={() => mutate({ id })} className={className}>
-          {children}
-        </button>
-      )}
+      <button
+        disabled={isPending}
+        onClick={() => mutate({ id })}
+        className={className}
+      >
+        {isPending ? <Spinner className="m-auto" /> : children}
+      </button>
     </>
   );
 }

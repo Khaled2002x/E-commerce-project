@@ -1,6 +1,12 @@
 "use client";
 import React from "react";
-import { FaGift, FaMailBulk, FaPhone, FaTruck, FaUser } from "react-icons/fa";
+import {
+  FaGift,
+  FaMailBulk,
+  FaPhoneAlt,
+  FaTruck,
+  FaUser,
+} from "react-icons/fa";
 import Signout from "./Signout";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
@@ -12,7 +18,7 @@ export default function Header() {
 
   const isLogin = session.status === "authenticated";
   return (
-    <div className="px-1   hidden md:flex md:px-4  xl:px-20 py-2 border-b border-[#F3F4F6] w-full m-auto justify-between gap-2  items-center">
+    <div className="px-1   hidden lg:flex md:px-4  xl:px-20 py-2 border-b border-[#F3F4F6] w-full m-auto justify-between gap-2  items-center">
       <div className="left flex items-center gap-4">
         <div className=" flex items-center gap-2 justify-center">
           <FaTruck className="text-sprinGreen text[14px]" />
@@ -33,7 +39,7 @@ export default function Header() {
           href="tel:+18001234567"
           className=" flex items-center gap-2 hover:text-sprinGreen"
         >
-          <FaPhone className="text-azure " />
+          <FaPhoneAlt className="text-azure " />
           <p className="text-azure font-medium text-[14px] ">
             +1 (800) 123-4567
           </p>

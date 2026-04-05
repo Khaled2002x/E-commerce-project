@@ -33,30 +33,27 @@ export default function CheckoutComponent() {
     resolver: zodResolver(PaymentSchema),
   });
 
-  const { data, isPending } = useQuery({
+  const { data, isPending, isError } = useQuery({
     queryKey: ["Cart"],
 
     queryFn: async () => {
       try {
-        const request = await fetch(`api/Cart`);
+        const request = await fetch(`/api/Cart`, {
+          credentials: "include",
+        });
         if (!request.ok) throw new Error(request.statusText);
         const payload = await request.json();
 
         return payload;
-      } catch (error) {
-        throw new Error(error.message);
+      } catch (error: any) {
+        throw new Error(error);
       }
     },
-    staleTime: 1000 * 60 * 60 * 24,
+    staleTime: 1000 * 60 * 60,
     refetchOnMount: false,
     refetchOnWindowFocus: false,
-    refetchOnReconnect: false,
   });
   const UserCart: CartData = data?.data;
-  if (UserCart.totalCartPrice === 0) {
-    toast.error("you dont have product in your cart");
-    router.push("/");
-  }
   const {
     handleSubmit,
     register,

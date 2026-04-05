@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import logo from "../../public/Component 1.svg";
-import { FaHeadphones, FaHeart, FaShoppingCart, FaUser } from "react-icons/fa";
+import { FaBars, FaHeadphones, FaShoppingCart, FaUser } from "react-icons/fa";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { useQuery } from "@tanstack/react-query";
@@ -19,13 +19,14 @@ export function NavigationMenuDemo() {
   const { data: Cartdata } = useQuery({
     queryKey: ["Cart"],
     queryFn: async () => {
-      return fetch(`api/Cart`).then((payload) => payload.json());
+      return fetch(`/api/Cart`, { credentials: "include" }).then((payload) =>
+        payload.json(),
+      );
     },
     staleTime: 1000 * 60 * 60 * 24,
     refetchOnMount: false,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
-    retry: false,
   });
   const Products: CartData = Cartdata?.data;
   const NumberofCartItem = Products?.products?.length;
@@ -42,8 +43,16 @@ export function NavigationMenuDemo() {
         className={`bg-white h-16 px-3 md:px-10 lg:px-20 py-4 flex  fixed z-50 left-0 right-0  ${scroll ? "top-0" : ""}   justify-between w-full m-auto items-center`}
       >
         {" "}
-        <Image src={logo} alt="logo image " width={200} height={100} />
-        <ul className="hidden lg:flex justify-center items-center py-4 gap-6 ">
+        <div className="">
+          <Image
+            src={logo}
+            alt="logo image "
+            width={200}
+            height={100}
+            className=""
+          />
+        </div>
+        <ul className="hidden  md:flex justify-center items-center  gap-6 ">
           <li>
             <Link
               className="hover:text-sprinGreen duration-75 rounded-xl p-3"
@@ -70,10 +79,31 @@ export function NavigationMenuDemo() {
             </Link>
           </li>
         </ul>
-        {/* زرار المينيو يظهر في الموبايل فقط */}
-        <button className="lg:hidden  ms-auto" onClick={() => setOpen(!open)}>
-          ☰
-        </button>
+        <div className="  justify-center   flex items-center gap-3">
+          <div className="  flex justify-center  items-center gap-3 pr-3 ">
+            <div className="rounded-full size-10  bg-green-100 hidden lg:flex justify-center items-center">
+              <FaHeadphones className="text-sprinGreen  " />
+            </div>
+            <div className="   hidden lg:flex  flex-col gap-1.5 border-r border-[#E5E7EB] p-1">
+              <p className=" text-gray-600">Support</p>
+              <p className=" font-semibold">24/7 Help</p>
+            </div>
+            <Link href={"/Cart"} className=" group relative  ">
+              <FaShoppingCart className="text-azure group-hover:text-sprinGreen  text-2xl " />
+              {isLogin && NumberofCartItem > 0 && (
+                <span className=" absolute -top-3.5 -right-2.5 font-bold text-[10px]   rounded-full text-white flex justify-center items-center  bg-sprinGreen size-5">
+                  {NumberofCartItem}
+                </span>
+              )}
+            </Link>
+          </div>
+          <button
+            className="md:hidden bg-sprinGreen flex justify-center items-center size-10 rounded-full"
+            onClick={() => setOpen(true)}
+          >
+            <FaBars className="text-white" />
+          </button>
+        </div>
         {/* الخلفية */}
         {open && (
           <div
@@ -83,7 +113,7 @@ export function NavigationMenuDemo() {
         )}
         {/* Sidebar */}
         <div
-          className={`fixed top-0  z-100 right-0 p-2 h-full w-64 bg-white shadow-lg transform transition-transform duration-300 md:hidden ${
+          className={`fixed top-0  z-100 right-0 p-2 h-full w-70 bg-white shadow-lg transform transition-transform duration-300 md:hidden ${
             open ? "translate-x-0" : "  translate-x-full"
           }`}
         >
@@ -160,25 +190,6 @@ export function NavigationMenuDemo() {
               </span>
             </Link>
           </div>
-        </div>
-        <div className="  justify-center hidden md:flex items-center gap-3">
-          <div className=" flex justify-center items-center gap-3 pr-3 border-r border-[#E5E7EB]">
-            <div className="rounded-full size-10 bg-green-100 flex justify-center items-center">
-              <FaHeadphones className="text-sprinGreen  " />
-            </div>
-            <div className=" flex flex-col gap-1.5">
-              <p className=" text-gray-600">Support</p>
-              <p className=" font-semibold">24/7 Help</p>
-            </div>
-          </div>
-          <Link href={"/Cart"} className=" group relative">
-            <FaShoppingCart className="text-azure group-hover:text-sprinGreen  text-2xl " />
-            {isLogin && NumberofCartItem > 0 && (
-              <span className=" absolute -top-3.5 -right-2.5 font-bold text-[10px]   rounded-full text-white flex justify-center items-center  bg-sprinGreen size-5">
-                {NumberofCartItem}
-              </span>
-            )}
-          </Link>
         </div>
       </nav>
     </div>

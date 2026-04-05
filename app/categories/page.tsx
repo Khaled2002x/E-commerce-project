@@ -1,13 +1,14 @@
-"use client";
-import { useSession } from "next-auth/react";
+import Getallcategories from "@/apis/getallCategories";
+import CtegoriesComponent from "./CtegoriesComponent";
 
-export default function Categories() {
-  const data = useSession();
-  console.log(data);
+export default async function Categories() {
+  const data = await Getallcategories();
 
   return (
     <>
-      <div className="pt-10 text-center">Categories</div>
+      <div>
+        <CtegoriesComponent data={data} />
+      </div>
     </>
   );
 }

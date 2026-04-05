@@ -49,7 +49,7 @@ export default async function page({
                 <FaCarTunnel />
                 Add to cart{" "}
               </AddtoCartButton>
-              <Button className="bg-[#101828] rounded-[12px] py-6 cursor-pointer">
+              <Button className="bg-textGray rounded-[12px] py-6 cursor-pointer">
                 Buy Now{" "}
               </Button>
             </div>

@@ -3,7 +3,7 @@ import React from "react";
 import { useFormContext } from "react-hook-form";
 import { FaCheck, FaCreditCard, FaMoneyBill } from "react-icons/fa";
 
-export default function CashComponent() {
+export default function PaymentTypeComponent() {
   const { watch, setValue } = useFormContext();
   const paymentMethod = watch("paymentmethod");
 

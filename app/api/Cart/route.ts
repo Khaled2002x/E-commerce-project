@@ -8,17 +8,20 @@ export async function GET(req: NextRequest) {
       status: "failed",
       message: "unuthorized please login first",
     });
-
-  const request = await fetch(`${process.env.Apiroute_v2}/cart`, {
-    headers: {
-      token: `${token?.token}`,
-    },
-  });
-  if (!request.ok)
-    return NextResponse.json({
-      statusMsg: request.status,
-      massege: request.statusText,
+  try {
+    const request = await fetch(`${process.env.Apiroute_v2}/cart`, {
+      headers: {
+        token: `${token?.token}`,
+      },
     });
-  const payload = await request.json();
-  return NextResponse.json(payload);
+    if (!request.ok)
+      return NextResponse.json({
+        statusMsg: request.status,
+        massege: request.statusText,
+      });
+    const payload = await request.json();
+    return NextResponse.json(payload);
+  } catch (error) {
+    throw new Error(error.message);
+  }
 }

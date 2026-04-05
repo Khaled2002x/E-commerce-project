@@ -9,8 +9,8 @@ export default function ProductCard({
   product: ProductInterface;
 }) {
   return (
-    <div className=" rounded-[8px] border border-border   hover:scale-[1.02] hover:shadow cursor-pointer duration-100 transition-all">
-      <div className="top  relative ">
+    <div className=" rounded-[8px] border border-border   hover:scale-[1.02] hover:shadow cursor-pointer duration-300 transition-all">
+      <div className=" relative">
         <Image
           src={product.imageCover}
           alt={product.title}

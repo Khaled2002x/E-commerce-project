@@ -1,13 +1,13 @@
 import Image from "next/image";
-import src from "../../public/Vector (1).png";
-import { ProductInterface } from "@/interfaces/ProductInterface";
-import ProductCard from "@/Componenets/ui/ProductCard";
-export default function ShopComponent({ data }: { data: ProductInterface[] }) {
+import src from "../../public/Vector2.png";
+import { BrandsInterface } from "@/interfaces/GetAllBrandsInterface";
+import BrandCard from "./BrandCard";
+export default function BrandsComponent({ data }: { data: BrandsInterface[] }) {
   return (
     <div className="">
-      <header className=" bg-sprinGreen w-full py-8">
+      <header className=" bg-[#7F22FE] w-full py-8">
         <main className="px-3 md:px-10 lg:px-20 py-4 ">
-          <p className="text-white">Home / AllProduct</p>
+          <p className="text-white">Home / Brands</p>
           <div className=" flex justify-start items-center gap-4">
             <div className="bg-white/20 size-14  flex justify-center items-center object-cover rounded-[16px]">
               <Image
@@ -20,26 +20,23 @@ export default function ShopComponent({ data }: { data: ProductInterface[] }) {
             </div>
             <div className=" flex flex-col ">
               <h2 className="font-bold m-0 text-[36px] text-white">
-                All Products
+                Top Brands
               </h2>
               <p className=" font-medium m-0 text-white/80">
                 {" "}
-                Explore our complete product collection
+                Shop from your favorite brands
               </p>
             </div>
           </div>
         </main>
       </header>
-      <section className=" flex flex-col px-3 md:px-10 lg:px-20 py-4 justify-start items-start gap-6">
-        <p className="text-[14px] font-medium text-azure">
-          Showing {data?.length} products
-        </p>
-        <div className="grid animate-fade-in grid-cols-1 md:grid-cols-4 gap-3">
-          {data?.map((product) => {
-            return <ProductCard product={product} key={product._id} />;
+      <div className="bg-[#F9FAFB80] min-h-screen  pb-10 px-3 md:px-10 lg:px-20 py-4">
+        <div className=" grid animate-fade-in sm:grid-cols-2 gap-5 md:grid-cols-4 w-full lg:grid-cols-5 items-center">
+          {data?.map((Brand) => {
+            return <BrandCard data={Brand} key={Brand?._id} />;
           })}
         </div>
-      </section>
+      </div>
     </div>
   );
 }

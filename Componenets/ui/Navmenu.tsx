@@ -7,58 +7,41 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import Link from "next/link";
-const components: { title: string; href: string; description: string }[] = [
+
+const components: { title: string; href: string }[] = [
   {
-    title: "Alert Dialog",
-    href: "/docs/primitives/alert-dialog",
-    description:
-      "A modal dialog that interrupts the user with important content and expects a response.",
+    title: "All Categories",
+    href: "/categories",
   },
   {
-    title: "Hover Card",
-    href: "/docs/primitives/hover-card",
-    description:
-      "For sighted users to preview content available behind a link.",
+    title: "Electronics",
+    href: "/categories/6439d2d167d9aa4ca970649f",
   },
   {
-    title: "Progress",
-    href: "/docs/primitives/progress",
-    description:
-      "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
+    title: "Woemen Fashion",
+    href: "/categories/6439d58a0049ad0b52b9003f",
   },
   {
-    title: "Scroll-area",
-    href: "/docs/primitives/scroll-area",
-    description: "Visually or semantically separates content.",
-  },
-  {
-    title: "Tabs",
-    href: "/docs/primitives/tabs",
-    description:
-      "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
-  },
-  {
-    title: "Tooltip",
-    href: "/docs/primitives/tooltip",
-    description:
-      "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
+    title: "mens Fashion",
+    href: "/categories/6439d5b90049ad0b52b90048",
   },
 ];
 export default function Navmenu() {
   return (
-    <NavigationMenu>
+    <NavigationMenu className="z-50">
       <NavigationMenuItem className="hidden md:flex">
-        <NavigationMenuTrigger>Components</NavigationMenuTrigger>
+        <NavigationMenuTrigger className=" hover:text-sprinGreen">
+          Categories
+        </NavigationMenuTrigger>
         <NavigationMenuContent>
-          <ul className="grid w-[400px] gap-2 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+          <ul className="grid w-50 gap-2  z-50 grid-cols-1 ">
             {components.map((component) => (
               <ListItem
                 key={component.title}
                 title={component.title}
                 href={component.href}
-              >
-                {component.description}
-              </ListItem>
+                className="z-50"
+              ></ListItem>
             ))}
           </ul>
         </NavigationMenuContent>

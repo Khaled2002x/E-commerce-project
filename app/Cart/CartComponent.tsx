@@ -8,14 +8,12 @@ import UserCartComponent from "./UserCartComponent";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Spinner } from "@/Componenets/ui/Spinner";
-import { useRouter } from "next/navigation";
 export default function CartComponent() {
-  const router = useRouter();
   const { data, isSuccess, isPending } = useQuery({
     queryKey: ["Cart"],
     queryFn: async () => {
       try {
-        const request = await fetch(`api/Cart`);
+        const request = await fetch(`/api/Cart`);
         if (!request.ok) throw new Error(request.statusText);
         const payload = await request.json();
         return payload;
@@ -23,10 +21,9 @@ export default function CartComponent() {
         throw new Error(error.message);
       }
     },
-    staleTime: 1000 * 60 * 60 * 24,
+    staleTime: 0,
     refetchOnMount: false,
     refetchOnWindowFocus: false,
-    refetchOnReconnect: false,
   });
   const UserCart: CartData = data?.data;
 
@@ -39,10 +36,7 @@ export default function CartComponent() {
     return (
       <Spinner className="min-h-screen flex justify-center m-auto items-center" />
     );
-  if (UserCart.totalCartPrice === 0) {
-    toast.error("you dont have product in your cart");
-    router.push("/");
-  }
+
   return (
     <div className="m-auto px-3 md:px-10 lg:px-20 py-4  min-h-screen">
       <header className="flex flex-col gap-3">
