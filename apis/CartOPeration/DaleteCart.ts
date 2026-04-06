@@ -15,6 +15,6 @@ export async function DeleteCartItem(id: string) {
     const payload = await request.json();
     return payload;
   } catch (error) {
-    throw new Error(error);
+    throw new Error("server error");
   }
 }

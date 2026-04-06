@@ -1,5 +1,5 @@
 export interface Root {
-  data: Data;
+  data: SpecificCategory;
 }
 
 export interface SpecificCategory {

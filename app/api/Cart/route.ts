@@ -22,6 +22,6 @@ export async function GET(req: NextRequest) {
     const payload = await request.json();
     return NextResponse.json(payload);
   } catch (error) {
-    throw new Error(error.message);
+    throw new Error("server error");
   }
 }

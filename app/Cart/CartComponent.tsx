@@ -18,7 +18,7 @@ export default function CartComponent() {
         const payload = await request.json();
         return payload;
       } catch (error) {
-        throw new Error(error.message);
+        throw new Error("server error");
       }
     },
     staleTime: 0,

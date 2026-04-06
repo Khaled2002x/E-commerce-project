@@ -45,8 +45,8 @@ export default function CheckoutComponent() {
         const payload = await request.json();
 
         return payload;
-      } catch (error: any) {
-        throw new Error(error);
+      } catch (error) {
+        throw new Error("server error");
       }
     },
     staleTime: 1000 * 60 * 60,
@@ -91,7 +91,7 @@ export default function CheckoutComponent() {
         setLoading(false);
         window.location.href = response?.session?.url;
       } catch (error) {
-        toast.error(error.message);
+        toast.error("faild transaction");
         setLoading(false);
       }
     }

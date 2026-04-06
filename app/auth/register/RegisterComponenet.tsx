@@ -193,6 +193,7 @@ export default function RegisterComponenet() {
         />
         <Button
           type="submit"
+          disabled={loading}
           className=" rounded-[8px] w-full bg-sprinGreen py-6 cursor-pointer"
         >
           <FaUser /> {loading ? <Spinner /> : "Create My Account"}

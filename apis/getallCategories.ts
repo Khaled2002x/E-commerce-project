@@ -12,8 +12,6 @@ export default async function Getallcategories(): Promise<CategoryInterface[]> {
 
     return category?.data;
   } catch (error) {
-    console.log(process.env.Apiroute_v1);
-
     throw new Error("sever not found");
   }
 }

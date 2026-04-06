@@ -1,7 +1,6 @@
 import { NextAuthOptions } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { jwtDecode } from "jwt-decode";
-import { use } from "react";
 export const NextAuthConfig: NextAuthOptions = {
   providers: [
     Credentials({
@@ -12,16 +11,13 @@ export const NextAuthConfig: NextAuthOptions = {
       },
       authorize: async (credentials) => {
         try {
-          const data = await fetch(
-            `https://ecommerce.routemisr.com/api/v1/auth/signin`,
-            {
-              method: "POST",
-              body: JSON.stringify(credentials),
-              headers: {
-                "Content-Type": "application/json",
-              },
+          const data = await fetch(`${process.env.Apiroute_v1}/auth/signin`, {
+            method: "POST",
+            body: JSON.stringify(credentials),
+            headers: {
+              "Content-Type": "application/json",
             },
-          );
+          });
           const res = await data.json();
           if (data.ok) {
             const { id }: { id: string } = jwtDecode(res.token);

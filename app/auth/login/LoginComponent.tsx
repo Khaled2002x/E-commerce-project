@@ -46,11 +46,12 @@ export default function LoginComponenet() {
         className=" w-full md:w-1/2 lg:w-1/3 flex flex-col gap-5  m-auto py-10 px-6"
       >
         <div className=" flex flex-col gap-2 text-center">
-          <h2 className=" text-[20px] md:text-[30px]  font-semibold  text-azure text-center ">
-            Create Your Account
+          <h2 className=" text-[30px]  font-bold  text-azure text-center ">
+            <span className=" text-sprinGreen ">Fresh</span>
+            Cart
           </h2>
           <p className=" font-medium text-azure">
-            Start your fresh journey with us today
+            Sign in to continue your fresh shopping experience
           </p>
 
           <Controller
@@ -113,6 +114,7 @@ export default function LoginComponenet() {
           />
         </div>
         <Button
+          disabled={loading}
           type="submit"
           className=" rounded-[8px] w-full bg-sprinGreen py-6 cursor-pointer"
         >
