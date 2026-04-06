@@ -1,14 +1,14 @@
 import { getToken } from "next-auth/jwt";
 import { NextRequest, NextResponse } from "next/server";
 export async function proxy(req: NextRequest) {
-  const cockieName =
+  const cookieName =
     process.env.NODE_ENV === "production"
       ? "__Secure-next-auth.session-token"
       : "next-auth.session-token";
   const token = await getToken({
     req: req,
     secret: process.env.NEXTAUTH_SECRET,
-    cockieName,
+    cookieName,
   });
   if (!!token) return NextResponse.next();
   return NextResponse.redirect(new URL("/auth/login", req.url));
