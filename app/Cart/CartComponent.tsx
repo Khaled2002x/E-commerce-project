@@ -21,9 +21,6 @@ export default function CartComponent() {
         throw new Error("server error");
       }
     },
-    staleTime: 0,
-    refetchOnMount: false,
-    refetchOnWindowFocus: false,
   });
   const UserCart: CartData = data?.data;
 
