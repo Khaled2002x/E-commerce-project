@@ -26,7 +26,7 @@ export default function AddtoCartButton({
       });
     },
     onError: (error) => {
-      toast.error(error.message);
+      toast.error("please login first");
     },
   });
   return (
